@@ -1,0 +1,63 @@
+<section class="dash-section">
+  <header>
+    <h1 class="dash-section__title">Clients</h1>
+    <p class="dash-section__subtitle">Section titles, the client list and the testimonial.</p>
+  </header>
+
+  @if (loading()) {
+    <p class="dash-status">Loading…</p>
+  } @else {
+    <div class="dash-card">
+      <div class="dash-row">
+        <label class="dash-field">Section tag
+          <input type="text" [(ngModel)]="form.sectionTag" name="sectionTag" />
+        </label>
+        <label class="dash-field">"Trusted" label
+          <input type="text" [(ngModel)]="form.trustedLabel" name="trustedLabel" />
+        </label>
+      </div>
+      <label class="dash-field">Headline
+        <input type="text" [(ngModel)]="form.title" name="title" />
+      </label>
+    </div>
+
+    <div class="dash-card">
+      <h2 class="dash-card__title">Client list</h2>
+      @for (c of clients; track c.id; let i = $index) {
+        <div class="dash-item">
+          <div class="dash-item__head">
+            <span>Client {{ i + 1 }}</span>
+            <button type="button" class="btn btn--danger" (click)="remove(i)">Remove</button>
+          </div>
+          <div class="dash-row">
+            <label class="dash-field">Name
+              <input type="text" [(ngModel)]="c.name" [name]="'name-' + c.id" />
+            </label>
+            <label class="dash-field">Sector
+              <input type="text" [(ngModel)]="c.category" [name]="'cat-' + c.id" />
+            </label>
+          </div>
+        </div>
+      }
+      <div class="dash-actions">
+        <button type="button" class="btn btn--ghost" (click)="add()">+ Add client</button>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <h2 class="dash-card__title">Testimonial</h2>
+      <label class="dash-field">Quote
+        <textarea [(ngModel)]="testimonial.quote" name="quote"></textarea>
+      </label>
+      <label class="dash-field">Author
+        <input type="text" [(ngModel)]="testimonial.author" name="author" />
+      </label>
+    </div>
+
+    <div class="dash-actions">
+      <button type="button" class="btn" [disabled]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Save changes' }}</button>
+      @if (message()) { <p class="dash-msg dash-msg--ok">{{ message() }}</p> }
+    </div>
+  }
+  @if (error()) { <p class="dash-msg dash-msg--err">{{ error() }}</p> }
+</section>

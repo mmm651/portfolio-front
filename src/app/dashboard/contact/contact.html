@@ -1,0 +1,38 @@
+<section class="dash-section">
+  <header>
+    <h1 class="dash-section__title">Messages</h1>
+    <p class="dash-section__subtitle">Inquiries sent from the Contact form (newest first).</p>
+  </header>
+
+  <div class="dash-actions">
+    <button type="button" class="btn btn--ghost" (click)="load()">Refresh</button>
+  </div>
+
+  @if (loading()) {
+    <p class="dash-status">Loading…</p>
+  } @else if (messages().length === 0 && !error()) {
+    <p class="dash-status">No messages yet.</p>
+  } @else {
+    @for (m of messages(); track m._id ?? $index) {
+      <article class="msg-item">
+        <div class="msg-item__meta">
+          <strong>{{ m.name }} · <a [href]="'mailto:' + m.email">{{ m.email }}</a></strong>
+          <span>{{ m.date | date: 'medium' }}</span>
+        </div>
+        <p class="msg-item__body">{{ m.projectVision }}</p>
+
+        <div class="dash-actions" style="margin-top: 10px">
+          <button
+            type="button"
+            class="btn btn--danger"
+            [disabled]="deletingId() === m._id"
+            (click)="remove(m)"
+          >
+            {{ deletingId() === m._id ? 'Deleting…' : 'Delete' }}
+          </button>
+        </div>
+      </article>
+    }
+  }
+  @if (error()) { <p class="dash-msg dash-msg--err">{{ error() }}</p> }
+</section>

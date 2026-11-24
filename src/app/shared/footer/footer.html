@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="footer-brand">
+      <span class="footer-brand__name">{{ brandTitle() }}</span>
+      <span class="footer-sep">|</span>
+      <span class="footer-tagline">{{ tagline }}</span>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      @for (item of navItems(); track item.path) {
+        <a [routerLink]="item.path" class="footer-link">{{ item.label }}</a>
+      }
+    </nav>
+
+    <div class="footer-meta">
+      <button type="button" class="orbit-btn" (click)="orbit.toggle()">
+        {{ orbit.isPlaying() ? 'Pause Orbit' : 'Resume Orbit' }}
+      </button>
+      <span>&copy; {{ currentYear }} {{ brandTitle() }} Studio.</span>
+    </div>
+  </div>
+</footer>

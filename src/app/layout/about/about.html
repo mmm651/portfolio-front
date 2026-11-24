@@ -1,0 +1,17 @@
+<div class="stage-card">
+  <div class="stage-card-head">
+    <span class="stage-pill">{{ data().sectionTag }}</span>
+  </div>
+
+  <h2 class="stage-headline">{{ data().title }}</h2>
+  <p class="about-body">{{ data().description }}</p>
+
+  <div class="stats">
+    @for (stat of data().stats; track stat.id; let i = $index) {
+      <div class="stat">
+        <div class="stat__value" [class.is-terracotta]="i === 0" [class.is-ochre]="i === 1">{{ stat.value }}</div>
+        <div class="stat__label">{{ stat.label }}</div>
+      </div>
+    }
+  </div>
+</div>

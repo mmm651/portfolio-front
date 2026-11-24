@@ -1,0 +1,26 @@
+<section class="not-found-page">
+  <div class="not-found-container">
+    <span class="not-found-code">404</span>
+
+    <h1 class="not-found-title">Page Not Found</h1>
+
+    <p class="not-found-desc">
+      The page you are looking for doesn’t exist or may have been moved in
+      {{ brandTitle }}.
+    </p>
+
+    @if (actions.length > 0) {
+      <div class="not-found-actions">
+        @for (action of actions; track action.path) {
+          <a
+            [routerLink]="action.path"
+            class="not-found-btn"
+            [class.not-found-btn--ghost]="action.ghost"
+          >
+            {{ action.label }}
+          </a>
+        }
+      </div>
+    }
+  </div>
+</section>

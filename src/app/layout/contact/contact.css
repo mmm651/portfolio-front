@@ -1,0 +1,52 @@
+.contact-email { font-size: 0.75rem; font-weight: 500; color: var(--terracotta); text-decoration: none; }
+.contact-email:hover { text-decoration: underline; }
+
+.contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+@media (min-width: 640px) { .form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.field { display: flex; flex-direction: column; }
+.field label { margin-bottom: 0.25rem; font-size: 0.75rem; font-weight: 600; color: rgba(var(--espresso-rgb), 0.8); }
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.75rem;
+  background: var(--cream);
+  border: 1px solid rgba(var(--ochre-rgb), 0.4);
+  color: var(--espresso);
+  font: inherit;
+  font-size: 0.8rem;
+}
+@media (min-width: 640px) { .field input, .field textarea { font-size: 0.875rem; } }
+.field textarea { resize: none; }
+.field input::placeholder, .field textarea::placeholder { color: rgba(var(--espresso-rgb), 0.4); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--terracotta); }
+.field .is-invalid { border-color: var(--terracotta); }
+
+.error { margin-top: 0.25rem; font-size: 0.7rem; color: var(--terracotta); }
+
+.form-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding-top: 0.25rem; }
+
+.feedback { font-size: 0.75rem; font-weight: 600; color: var(--terracotta); }
+
+.submit-btn {
+  margin-left: auto;
+  padding: 0.625rem 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--espresso);
+  color: var(--warmgold);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+@media (min-width: 640px) { .submit-btn { font-size: 0.875rem; } }
+.submit-btn:hover:not(:disabled) { opacity: 0.95; }
+.submit-btn:active:not(:disabled) { transform: scale(0.95); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }

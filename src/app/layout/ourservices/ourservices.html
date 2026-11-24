@@ -1,0 +1,46 @@
+<div class="stage-card">
+  <div class="stage-card-head">
+    <span class="stage-pill stage-pill--ochre">{{ data().sectionTag }}</span>
+    @if (items().length) {
+      <span class="stage-meta">{{ counter() }}</span>
+    }
+  </div>
+
+  <h2 class="stage-headline">{{ data().title }}</h2>
+
+  @if (active(); as service) {
+    <div class="chips" role="tablist">
+      @for (item of items(); track item._id ?? item.id ?? item.title; let i = $index) {
+        <button
+          type="button"
+          role="tab"
+          class="chip"
+          [class.is-active]="i === selectedIndex()"
+          [attr.aria-selected]="i === selectedIndex()"
+          (click)="select(i)"
+        >
+          {{ item.title }}
+        </button>
+      }
+    </div>
+
+    <div class="service-detail">
+      @if (service.category) {
+        <div class="service-detail__tag">{{ service.category }}</div>
+      }
+      <h3 class="service-detail__title">{{ service.title }}</h3>
+      @if (service.description) {
+        <p class="service-detail__desc">{{ service.description }}</p>
+      }
+      @if (service.features?.length) {
+        <div class="features">
+          @for (f of service.features; track f) {
+            <span class="feature">✦ {{ f }}</span>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="empty">No services available at the moment.</p>
+  }
+</div>

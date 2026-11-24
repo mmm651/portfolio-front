@@ -1,0 +1,33 @@
+<div #stage class="orbit-stage">
+  <div #trackOuter class="orbit-track orbit-track--outer"></div>
+  <div #trackInner class="orbit-track orbit-track--inner"></div>
+
+  @for (b of bubbles(); track b.slot) {
+    <a
+      #bubble
+      class="nav-bubble nav-bubble--{{ b.slot }}"
+      [routerLink]="b.path"
+      (mouseenter)="setHover(b.slot)"
+      (mouseleave)="setHover(null)"
+      (focus)="setHover(b.slot)"
+      (blur)="setHover(null)"
+    >
+      <span class="nav-bubble__eyebrow">{{ b.eyebrow }}</span>
+      @for (label of [b.label]; track label) {
+        <span class="nav-bubble__label">{{ label }}</span>
+      }
+    </a>
+  }
+
+  <!-- Center stage: the active page renders here -->
+  <div class="center-stage">
+    <router-outlet />
+  </div>
+
+  <div class="orbit-pill">
+    <button type="button" class="orbit-pill__btn" title="Pause or resume the orbit" (click)="orbit.toggle()">
+      <span class="orbit-pill__dot" [class.is-paused]="!orbit.isPlaying()"></span>
+      <span>{{ orbit.isPlaying() ? 'Orbit: On' : 'Orbit: Paused' }}</span>
+    </button>
+  </div>
+</div>

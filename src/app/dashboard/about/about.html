@@ -1,0 +1,51 @@
+<section class="dash-section">
+  <header>
+    <h1 class="dash-section__title">About</h1>
+    <p class="dash-section__subtitle">Headline, description and the numbers shown on the About card.</p>
+  </header>
+
+  @if (loading()) {
+    <p class="dash-status">Loading…</p>
+  } @else {
+    <div class="dash-card">
+      <label class="dash-field">Section tag
+        <input type="text" [(ngModel)]="form.sectionTag" name="sectionTag" />
+      </label>
+      <label class="dash-field">Headline
+        <input type="text" [(ngModel)]="form.title" name="title" />
+      </label>
+      <label class="dash-field">Description
+        <textarea [(ngModel)]="form.description" name="description" rows="4"></textarea>
+      </label>
+    </div>
+
+    <div class="dash-card">
+      <h2 class="dash-card__title">Stats</h2>
+      @for (s of stats; track s.id; let i = $index) {
+        <div class="dash-item">
+          <div class="dash-item__head">
+            <span>Stat {{ i + 1 }}</span>
+            <button type="button" class="btn btn--danger" (click)="removeStat(i)">Remove</button>
+          </div>
+          <div class="dash-row">
+            <label class="dash-field">Value
+              <input type="text" [(ngModel)]="s.value" [name]="'value-' + s.id" placeholder="85+" />
+            </label>
+            <label class="dash-field">Label
+              <input type="text" [(ngModel)]="s.label" [name]="'label-' + s.id" placeholder="Products" />
+            </label>
+          </div>
+        </div>
+      }
+      <div class="dash-actions">
+        <button type="button" class="btn btn--ghost" (click)="addStat()">+ Add stat</button>
+      </div>
+    </div>
+
+    <div class="dash-actions">
+      <button type="button" class="btn" [disabled]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Save changes' }}</button>
+      @if (message()) { <p class="dash-msg dash-msg--ok">{{ message() }}</p> }
+    </div>
+  }
+  @if (error()) { <p class="dash-msg dash-msg--err">{{ error() }}</p> }
+</section>

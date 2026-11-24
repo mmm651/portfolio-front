@@ -1,0 +1,24 @@
+<div class="stage-card">
+  <div class="stage-card-head">
+    <span class="stage-pill stage-pill--terracotta">{{ data().sectionTag }}</span>
+    <span class="trusted">{{ data().trustedLabel }}</span>
+  </div>
+
+  <h2 class="stage-headline">{{ data().title }}</h2>
+
+  <div class="partners">
+    @for (client of data().clientsList; track client.id) {
+      <div class="partner">
+        <div class="partner__name">{{ client.name }}</div>
+        <div class="partner__sector">{{ client.category }}</div>
+      </div>
+    }
+  </div>
+
+  @if (data().testimonial; as t) {
+    <blockquote class="quote">
+      <p class="quote__text">{{ t.quote }}</p>
+      <footer class="quote__author">{{ t.author }}</footer>
+    </blockquote>
+  }
+</div>

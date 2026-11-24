@@ -1,0 +1,24 @@
+<header class="dash-header">
+  <div class="dash-header__inner">
+    <a routerLink="/dashboard/home" class="dash-brand">
+      {{ brandTitle }}
+      <span class="dash-badge">Dashboard</span>
+    </a>
+
+    @if (navItems.length > 0) {
+      <nav class="dash-nav" aria-label="Dashboard Navigation">
+        @for (item of navItems; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="dash-link--active"
+            class="dash-link"
+          >
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+    }
+
+    <a routerLink="/" class="dash-site-link">View Site</a>
+  </div>
+</header>

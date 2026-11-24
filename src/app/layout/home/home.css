@@ -1,0 +1,70 @@
+.home-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  user-select: none;
+  animation: panelReveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* arched mirror frame behind the wordmark */
+.arch-halo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1.35rem 1.25rem;
+  border-radius: 9999px 9999px 2.25rem 2.25rem;
+  background: radial-gradient(
+    circle at 50% 28%,
+    rgba(var(--cream-rgb), 0.95) 0%,
+    rgba(var(--warmgold-rgb), 0.28) 62%,
+    rgba(var(--ochre-rgb), 0.14) 100%
+  );
+  border: 1.5px solid rgba(var(--ochre-rgb), 0.42);
+  box-shadow:
+    0 24px 60px -12px rgba(var(--terracotta-rgb), 0.18),
+    inset 0 2px 18px rgba(255, 255, 255, 0.9),
+    inset 0 -10px 24px rgba(var(--ochre-rgb), 0.14);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+@media (min-width: 640px) { .arch-halo { padding: 2.25rem 2.75rem 1.75rem; } }
+
+.home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.875rem;
+  border-radius: 999px;
+  background: rgba(var(--warmgold-rgb), 0.55);
+  border: 1px solid rgba(var(--ochre-rgb), 0.35);
+  color: var(--espresso);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 640px) { .home-badge { font-size: 0.75rem; margin-bottom: 1rem; } }
+
+.home-badge__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.home-subtitle {
+  margin: 0.5rem 0 0;
+  max-width: 24rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(var(--espresso-rgb), 0.85);
+}
+@media (min-width: 640px) { .home-subtitle { font-size: 1rem; margin-top: 0.75rem; max-width: 28rem; } }
+
+@keyframes pulse { 50% { opacity: 0.4; } }

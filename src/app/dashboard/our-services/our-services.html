@@ -1,0 +1,55 @@
+<section class="dash-section">
+  <header>
+    <h1 class="dash-section__title">Services</h1>
+    <p class="dash-section__subtitle">Section title and every service shown in the Services tabs.</p>
+  </header>
+
+  @if (loading()) {
+    <p class="dash-status">Loading…</p>
+  } @else {
+    <div class="dash-card">
+      <div class="dash-row">
+        <label class="dash-field">Section tag
+          <input type="text" [(ngModel)]="form.sectionTag" name="sectionTag" />
+        </label>
+        <label class="dash-field">Headline
+          <input type="text" [(ngModel)]="form.title" name="title" />
+        </label>
+      </div>
+    </div>
+
+    @for (s of items; track s.id; let i = $index; let last = $last) {
+      <div class="dash-card">
+        <div class="dash-item__head">
+          <span>Service {{ i + 1 }}</span>
+          <span class="dash-actions">
+            <button type="button" class="btn btn--ghost" style="padding: 2px 10px" [disabled]="i === 0" (click)="move(i, -1)">↑</button>
+            <button type="button" class="btn btn--ghost" style="padding: 2px 10px" [disabled]="last" (click)="move(i, 1)">↓</button>
+            <button type="button" class="btn btn--danger" (click)="remove(i)">Remove</button>
+          </span>
+        </div>
+        <div class="dash-row">
+          <label class="dash-field">Title
+            <input type="text" [(ngModel)]="s.title" [name]="'title-' + s.id" />
+          </label>
+          <label class="dash-field">Category label
+            <input type="text" [(ngModel)]="s.category" [name]="'cat-' + s.id" />
+          </label>
+        </div>
+        <label class="dash-field">Description
+          <textarea [(ngModel)]="s.description" [name]="'desc-' + s.id"></textarea>
+        </label>
+        <label class="dash-field">Features (one per line)
+          <textarea [(ngModel)]="s.featuresText" [name]="'feat-' + s.id"></textarea>
+        </label>
+      </div>
+    }
+
+    <div class="dash-actions">
+      <button type="button" class="btn btn--ghost" (click)="add()">+ Add service</button>
+      <button type="button" class="btn" [disabled]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Save changes' }}</button>
+      @if (message()) { <p class="dash-msg dash-msg--ok">{{ message() }}</p> }
+    </div>
+  }
+  @if (error()) { <p class="dash-msg dash-msg--err">{{ error() }}</p> }
+</section>

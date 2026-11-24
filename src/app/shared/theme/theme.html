@@ -1,0 +1,18 @@
+<div class="ambient-layer" aria-hidden="true">
+  @for (b of bubbles(); track $index) {
+    <div
+      class="ambient-bubble"
+      [style.--size.px]="b.spec.size"
+      [style.top]="b.spec.top ?? null"
+      [style.bottom]="b.spec.bottom ?? null"
+      [style.left]="b.spec.left ?? null"
+      [style.right]="b.spec.right ?? null"
+      [style.--dur]="b.spec.dur + 's'"
+      [style.--tx]="b.spec.tx"
+      [style.--ty]="b.spec.ty"
+      [style.--delay]="b.spec.delay"
+    >
+      <img [src]="b.src" alt="" loading="lazy" (error)="onImgError($event)" />
+    </div>
+  }
+</div>

@@ -1,0 +1,29 @@
+<section class="dash-section">
+  <header>
+    <h1 class="dash-section__title">Home</h1>
+    <p class="dash-section__subtitle">The text shown inside the centerpiece on the landing page.</p>
+  </header>
+
+  @if (loading()) {
+    <p class="dash-status">Loading…</p>
+  } @else {
+    <div class="dash-card">
+      <label class="dash-field">Badge (small tag above the title)
+        <input type="text" [(ngModel)]="form.tag" name="tag" />
+      </label>
+      <label class="dash-field">Title
+        <input type="text" [(ngModel)]="form.title" name="title" />
+      </label>
+      <label class="dash-field">Subtitle
+        <textarea [(ngModel)]="form.subtitle" name="subtitle"></textarea>
+      </label>
+      <p class="dash-hint">The big wordmark uses the Brand title (Brand page). This title is the fallback.</p>
+
+      <div class="dash-actions">
+        <button type="button" class="btn" [disabled]="saving()" (click)="save()">{{ saving() ? 'Saving…' : 'Save changes' }}</button>
+        @if (message()) { <p class="dash-msg dash-msg--ok">{{ message() }}</p> }
+      </div>
+    </div>
+  }
+  @if (error()) { <p class="dash-msg dash-msg--err">{{ error() }}</p> }
+</section>
